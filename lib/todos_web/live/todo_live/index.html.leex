@@ -1,0 +1,27 @@
+<header class="header">
+  <h1>todos</h1>
+  <%= live_component @socket, TodosWeb.TodoLive.AddItem, id: "new-todo" %>
+</header>
+
+<section class="main">
+  <form action="/todos/toggle-all" method="POST">
+    <button type="submit" id="toggle-all" class="toggle-all"></button>
+    <label for="toggle-all">Mark all as complete</label>
+  </form>
+  <ul class="todo-list" id="todo-list">
+    <%= for todo <- @todos do %>
+      <li class="<%= if todo.completed, do: 'completed', else: '' %>" id="item-<%= todo.id %>">
+        <div class="view">
+          <form action="/todos/<%= todo.id %>/toggle" method="POST" id="toggle-<%= todo.id %>">
+          </form>
+          <input class="toggle" type="checkbox" <%= if todo.completed, do: "checked" %>>
+          <label><%= todo.title %></label>
+          <button type="button" phx-click="delete" phx-value-id="<%= todo.id %>" class="destroy">
+        </div>
+        <form action="/todos/<%= todo.id %>" method="POST">
+          <input class="edit" name="title" value="<%= todo.title %>">
+        </form>
+      </li>
+    <% end %>
+  </ul>
+</section>
