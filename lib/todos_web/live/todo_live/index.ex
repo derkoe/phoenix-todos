@@ -40,6 +40,21 @@ defmodule TodosWeb.TodoLive.Index do
     {:noreply, assign(socket, :todos, list_todos())}
   end
 
+  @impl true
+  def handle_event("toggle", %{"id" => id}, socket) do
+    todo = TodoList.get_todo!(id)
+    {:ok, _} = TodoList.update_todo(todo, %{completed: !todo.completed})
+
+    {:noreply, assign(socket, :todos, list_todos())}
+  end
+
+  @impl true
+  def handle_event("clear-completed", %{}, socket) do
+    {:ok, _} = TodoList.clear_completed()
+
+    {:noreply, assign(socket, :todos, list_todos())}
+  end
+
   defp list_todos do
     TodoList.list_todos()
   end

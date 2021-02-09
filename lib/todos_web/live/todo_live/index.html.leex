@@ -14,7 +14,7 @@
         <div class="view">
           <form action="/todos/<%= todo.id %>/toggle" method="POST" id="toggle-<%= todo.id %>">
           </form>
-          <input class="toggle" type="checkbox" <%= if todo.completed, do: "checked" %>>
+          <input class="toggle" type="checkbox" <%= if todo.completed, do: "checked" %> phx-click="toggle" phx-value-id="<%= todo.id %>">
           <label><%= todo.title %></label>
           <button type="button" phx-click="delete" phx-value-id="<%= todo.id %>" class="destroy">
         </div>
@@ -25,3 +25,22 @@
     <% end %>
   </ul>
 </section>
+
+<% itemsLeft = length(Enum.filter(@todos, fn(x) -> !x.completed end)) %>
+<footer class="footer">
+  <span class="todo-count">
+    <strong><%= itemsLeft %></strong> <%= if itemsLeft == 1, do: "item", else: "items" %> left
+  </span>
+  <ul class="filters">
+    <li>
+      <a class="{all ? 'selected' : ''}" href="/todos">All</a>
+    </li>
+    <li>
+      <a class="{active ? 'selected' : ''}" href="/todos/active">Active</a>
+    </li>
+    <li>
+      <a class="{completed ? 'selected' : ''}" href="/todos/completed">Completed</a>
+    </li>
+  </ul>
+  <button class="clear-completed" phx-click="clear-completed">Clear completed</button>
+</footer>

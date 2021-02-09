@@ -103,4 +103,9 @@ defmodule Todos.TodoList do
   def change_todo(%Todo{} = todo, attrs \\ %{}) do
     Todo.changeset(todo, attrs)
   end
+
+  def clear_completed() do
+    from(t in Todo, where: t.completed) |> Repo.delete_all()
+  end
+
 end

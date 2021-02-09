@@ -10,7 +10,7 @@
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
-    <%= @inner_content %>
+    <section class="todoapp"><%= @inner_content %></section>
     <footer class="info">
       <p>Double-click to edit a todo</p>
       <p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
