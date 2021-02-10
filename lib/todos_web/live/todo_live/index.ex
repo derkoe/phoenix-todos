@@ -2,34 +2,28 @@ defmodule TodosWeb.TodoLive.Index do
   use TodosWeb, :live_view
 
   alias Todos.TodoList
-  alias Todos.TodoList.Todo
-
-  @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :todos, list_todos())}
-  end
 
   @impl true
   def handle_params(params, _url, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"id" => id}) do
+  defp apply_action(socket, :all, _params) do
     socket
-    |> assign(:page_title, "Edit Todo")
-    |> assign(:todo, TodoList.get_todo!(id))
+    |> assign(:page_title, "All")
+    |> assign(:todos , TodoList.list_todos())
   end
 
-  defp apply_action(socket, :new, _params) do
+  defp apply_action(socket, :active, _params) do
     socket
-    |> assign(:page_title, "New Todo")
-    |> assign(:todo, %Todo{})
+    |> assign(:page_title, "Active")
+    |> assign(:todos , TodoList.list_todos(false))
   end
 
-  defp apply_action(socket, :index, _params) do
+  defp apply_action(socket, :completed, _params) do
     socket
-    |> assign(:page_title, "Listing Todos")
-    |> assign(:todo, nil)
+    |> assign(:page_title, "Completed")
+    |> assign(:todos , TodoList.list_todos(true))
   end
 
   @impl true

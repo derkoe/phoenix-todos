@@ -35,7 +35,7 @@ defmodule TodosWeb.TodoLive.AddItem do
   defp add_todo(socket, todo_params) do
     case TodoList.create_todo(todo_params) do
       {:ok, _todo} ->
-        {:noreply, push_redirect(socket, to: "/")}
+        {:noreply, push_redirect(socket, to: "/todos")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

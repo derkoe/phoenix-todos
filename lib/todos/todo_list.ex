@@ -23,6 +23,13 @@ defmodule Todos.TodoList do
     |> Repo.all()
   end
 
+  def list_todos(completed) do
+    Todo
+      |> order_by(asc: :inserted_at)
+      |> where(completed: ^completed)
+      |> Repo.all()
+    end
+
   @doc """
   Gets a single todo.
 

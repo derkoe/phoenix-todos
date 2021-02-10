@@ -17,9 +17,9 @@ defmodule TodosWeb.Router do
   scope "/", TodosWeb do
     pipe_through :browser
 
-    live "/", TodoLive.Index, :index
-    live "/new", TodoLive.Index, :new
-    live "/:id/edit", TodoLive.Index, :edit
+    live "/todos", TodoLive.Index, :all
+    live "/todos/active", TodoLive.Index, :active
+    live "/todos/completed", TodoLive.Index, :completed
   end
 
   # Other scopes may use custom stacks.
