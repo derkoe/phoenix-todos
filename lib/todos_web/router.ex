@@ -17,15 +17,12 @@ defmodule TodosWeb.Router do
   scope "/", TodosWeb do
     pipe_through :browser
 
+    get "/", Redirect, to: "/todos"
+
     live "/todos", TodoLive.Index, :all
     live "/todos/active", TodoLive.Index, :active
     live "/todos/completed", TodoLive.Index, :completed
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", TodosWeb do
-  #   pipe_through :api
-  # end
 
   # Enables LiveDashboard only for development
   #

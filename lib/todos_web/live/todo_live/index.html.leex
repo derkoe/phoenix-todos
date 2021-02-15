@@ -10,18 +10,7 @@
   </form>
   <ul class="todo-list" id="todo-list">
     <%= for todo <- @todos do %>
-      <li class="<%= if todo.completed, do: 'completed', else: '' %>" id="item-<%= todo.id %>">
-        <div class="view">
-          <form action="/todos/<%= todo.id %>/toggle" method="POST" id="toggle-<%= todo.id %>">
-          </form>
-          <input class="toggle" type="checkbox" <%= if todo.completed, do: "checked" %> phx-click="toggle" phx-value-id="<%= todo.id %>">
-          <label><%= todo.title %></label>
-          <button type="button" phx-click="delete" phx-value-id="<%= todo.id %>" class="destroy">
-        </div>
-        <form action="/todos/<%= todo.id %>" method="POST">
-          <input class="edit" name="title" value="<%= todo.title %>">
-        </form>
-      </li>
+      <%= live_component @socket, TodosWeb.TodoLive.ItemComponent, id: todo.id, todo: todo %>
     <% end %>
   </ul>
 </section>
