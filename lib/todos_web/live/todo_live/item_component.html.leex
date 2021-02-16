@@ -1,12 +1,12 @@
 <li class="<%= if @todo.completed, do: 'completed', else: '' %>" id="item-<%= @todo.id %>" phx-hook="ListItem">
   <div class="view">
-    <form action="/todos/<%= @todo.id %>/toggle" method="POST" id="toggle-<%= @todo.id %>">
-    </form>
     <input class="toggle" type="checkbox" <%= if @todo.completed, do: "checked" %> phx-click="toggle" phx-value-id="<%= @todo.id %>">
     <label><%= @todo.title %></label>
     <button type="button" phx-click="delete" phx-value-id="<%= @todo.id %>" class="destroy">
   </div>
-  <form action="/todos/<%= @todo.id %>" method="POST">
-    <input class="edit" name="title" value="<%= @todo.title %>">
+  <%= f = form_for @changeset, "#",
+    phx_target: "#item-" <> @todo.id,
+    phx_submit: "change" %>
+    <%= text_input f, :title , class: "edit", value: @todo.title %>
   </form>
 </li>

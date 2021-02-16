@@ -44,8 +44,13 @@ defmodule TodosWeb.TodoLive.Index do
 
   @impl true
   def handle_event("clear-completed", %{}, socket) do
-    {:ok, _} = TodoList.clear_completed()
+    TodoList.clear_completed()
 
+    {:noreply, assign(socket, :todos, list_todos())}
+  end
+
+  def handle_info({:updated_todo, todo, todo_params}, socket) do
+    TodoList.update_todo(todo, todo_params)
     {:noreply, assign(socket, :todos, list_todos())}
   end
 

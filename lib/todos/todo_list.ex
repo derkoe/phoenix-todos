@@ -112,7 +112,7 @@ defmodule Todos.TodoList do
   end
 
   def clear_completed() do
-    from(t in Todo, where: t.completed) |> Repo.delete_all()
+    Repo.delete_all(from(t in Todo, where: t.completed))
   end
 
 end

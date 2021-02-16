@@ -7,7 +7,6 @@ defmodule TodosWeb.TodoLive.AddItem do
           {:ok, Phoenix.LiveView.Socket.t()}
   def update(assigns, socket) do
     changeset = TodoList.Todo.changeset(%TodoList.Todo{}, %{})
-
     {:ok,
      socket
      |> assign(assigns)
