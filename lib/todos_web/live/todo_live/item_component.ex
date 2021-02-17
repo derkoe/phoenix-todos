@@ -14,7 +14,7 @@ defmodule TodosWeb.TodoLive.ItemComponent do
      |> assign(:changeset, changeset)}
   end
 
-  @impl
+  @impl true
   def handle_event("change", %{"todo" => todo_params}, socket) do
     send self(), {:updated_todo, socket.assigns.todo, todo_params}
     {:noreply, socket}

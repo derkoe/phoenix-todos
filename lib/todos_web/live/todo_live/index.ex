@@ -49,6 +49,7 @@ defmodule TodosWeb.TodoLive.Index do
     {:noreply, assign(socket, :todos, list_todos())}
   end
 
+  @impl true
   def handle_info({:updated_todo, todo, todo_params}, socket) do
     TodoList.update_todo(todo, todo_params)
     {:noreply, assign(socket, :todos, list_todos())}
