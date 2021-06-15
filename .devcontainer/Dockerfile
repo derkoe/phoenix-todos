@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
-FROM elixir:1.11-alpine
+FROM elixir:1.12-alpine
 
 ENV LANG="en_US.UTF-8"
 
